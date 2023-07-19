@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -34,9 +35,20 @@ public class LoginTestClass extends BaseTestClass{
         By price1 = By.xpath("//div[text()='29.99']");
         System.out.println(chromeDriver.findElement(price1).getText());
     }
+    @Test
+    public void verifyProductsAddedToCart() {
+        chromeDriver.get(WEB_PAGE);
 
-    public void getText() {
+        Assertions.assertTrue(new LoginPage(chromeDriver)
+                .enterUserName("standard_user")
+                .eneterUserPassword("secret_sauce")
+                .clickOnLoginButton()
+                .addProductsToCart()
+                .openCartWithAddedProducts(chromeDriver)
+                .productsInCartAreVisible());
+
     }
+
     @Test
     public void logout(){
         chromeDriver.get(WEB_PAGE);
@@ -47,6 +59,11 @@ public class LoginTestClass extends BaseTestClass{
                 .clickOnLoginButton()
                 .logout(chromeDriver)
                 .verifyLoginPageIsVisible();
+    }
+
+    @AfterEach
+    public void clear() {
+        chromeDriver.quit();
     }
 
 }

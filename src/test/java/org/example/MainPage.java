@@ -17,10 +17,14 @@ public class MainPage extends BaseClass{
     @FindBy(css="#react-burger-menu-btn")
     private WebElement menuButton;
 
-    @FindBy(css="#logout_sidebar_link")
-    private WebElement logoutLinkButton;
+    @FindBy(css="#add-to-cart-sauce-labs-backpack")
+    private WebElement addToCartButtonBackpack;
 
+    @FindBy(css="#add-to-cart-sauce-labs-bike-light")
+    private WebElement addToCartButtonBikeLight;
 
+    @FindBy(css = ".shopping_cart_link")
+    private WebElement cartButton;
 
     @FindAll({@FindBy(xpath = "//div[text()='Sauce Labs Backpack']"),
             @FindBy(xpath = "//div[text()='Sauce Labs Bike Light']"),
@@ -56,8 +60,15 @@ public class MainPage extends BaseClass{
         return true;
     }
     
-    public void getPricesOfProducts() {
+    public MainPage addProductsToCart() {
+        addToCartButtonBackpack.click();
+        addToCartButtonBikeLight.click();
+        return this;
+    }
 
+    public CartPage openCartWithAddedProducts(WebDriver webDriver) {
+        cartButton.click();
+        return new CartPage(webDriver);
     }
 
     public LoginPage logout(WebDriver webDriver){
