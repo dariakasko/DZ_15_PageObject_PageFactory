@@ -17,6 +17,8 @@ public class LoginPage extends BaseClass{
 
     @FindBy(id = "login-button")
     private WebElement loginButton;
+    @FindBy(css = ".login_logo")
+    private WebElement loginLogo;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -37,5 +39,10 @@ public class LoginPage extends BaseClass{
         loginButton.click();
         return new MainPage(webDriver);
     }
+
+    public boolean verifyLoginPageIsVisible(){
+        return loginLogo.isDisplayed();
+    }
+
 
 }
