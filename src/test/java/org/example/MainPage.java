@@ -3,12 +3,13 @@ package org.example;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.Waiters;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainPage extends BaseClass{
     @FindBy(xpath = "//span[text()='Products']")
@@ -17,30 +18,13 @@ public class MainPage extends BaseClass{
     @FindBy(css="#react-burger-menu-btn")
     private WebElement menuButton;
 
-    @FindBy(css="#add-to-cart-sauce-labs-backpack")
-    private WebElement addToCartButtonBackpack;
-
-    @FindBy(css="#add-to-cart-sauce-labs-bike-light")
-    private WebElement addToCartButtonBikeLight;
 
     @FindBy(css = ".shopping_cart_link")
     private WebElement cartButton;
 
-    @FindAll({@FindBy(xpath = "//div[text()='Sauce Labs Backpack']"),
-            @FindBy(xpath = "//div[text()='Sauce Labs Bike Light']"),
-            @FindBy(xpath = "//div[text()='Sauce Labs Bolt T-Shirt']"),
-            @FindBy(xpath = "//div[text()='Sauce Labs Fleece Jacket']"),
-            @FindBy(xpath = "//div[text()='Sauce Labs Onesie']"),
-            @FindBy(xpath = "//div[text()='Test.allTheThings() T-Shirt (Red)']")})
-    private List<WebElement> listOfProducts;
 
-    @FindAll({@FindBy(xpath = "//div[text()='Sauce Labs Backpack']"),
-            @FindBy(xpath = "//div[text()='Sauce Labs Bike Light']"),
-            @FindBy(xpath = "//div[text()='Sauce Labs Bolt T-Shirt']"),
-            @FindBy(xpath = "//div[text()='Sauce Labs Fleece Jacket']"),
-            @FindBy(xpath = "//div[text()='Sauce Labs Onesie']"),
-            @FindBy(xpath = "//div[text()='Test.allTheThings() T-Shirt (Red)']")})
-    private List<WebElement> listOfPrices;
+    @FindBy(xpath = "//div[@class='inventory_item_price']")
+    private List<WebElement> productsList;
 
 
     public MainPage(WebDriver webDriver) {
@@ -51,20 +35,40 @@ public class MainPage extends BaseClass{
     public boolean nameOfMainPageIsVisible(){
         return mainPageName.isDisplayed();
     }
-    public boolean listOfProductsIsVisible(){
-        for (WebElement product: listOfProducts) {
-            if (!product.isDisplayed()) {
+
+
+    public String getProductName(int idOfProduct) {
+        return new ProductComponent(productsList.get(idOfProduct)).getProductName();
+    }
+
+    public int getProductPrice(int idOfProduct) {
+        return new ProductComponent(productsList.get(idOfProduct)).getProductPrice();
+    }
+
+    private boolean productNameIsVisible(int idOfProduct) {
+        return new ProductComponent(productsList.get(idOfProduct)).productNameIsVisible();
+    }
+    public boolean productsNamesAreVisible() {
+        for (int i = 0; i < productsList.size(); i++) {
+            if (!productNameIsVisible(i))
                 return false;
-            }
         }
         return true;
     }
-    
-    public MainPage addProductsToCart() {
-        addToCartButtonBackpack.click();
-        addToCartButtonBikeLight.click();
+    public List<WebElement> sortListByPrice() {
+        List<WebElement> sortedListOfProducts = productsList.stream()
+                .sorted(Comparator.comparing(MainPage::getProductPrice))
+                .collect(Collectors.toList());
+    }
+    private void addProductToCart(int idOfAddButton) {
+        new ProductComponent(productsList.get(idOfAddButton)).addProductToCart();
+    }
+    public MainPage addSomeProductsToCart() {
+        addProductToCart(0);
+        addProductToCart(1);
         return this;
     }
+
 
     public CartPage openCartWithAddedProducts(WebDriver webDriver) {
         cartButton.click();
