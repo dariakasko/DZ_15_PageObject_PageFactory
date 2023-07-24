@@ -37,6 +37,19 @@ public class LoginTestClass extends BaseTestClass {
                 .clickOnLoginButton()
                 .productsNamesAreVisible());
     }
+    @Test
+    @DisplayName("Verify product's List is sorted")
+    public void verifyListIsSorted(){
+        chromeDriver.get(WEB_PAGE);
+
+        Assertions.assertTrue(new LoginPage(chromeDriver)
+                .enterUserName("standard_user")
+                .eneterUserPassword("secret_sauce")
+                .clickOnLoginButton()
+                .sortListByPrice()
+                .verifyProductsListIsSorted());
+    }
+
 
     @Test
     @DisplayName("Verify products are added to Cart")

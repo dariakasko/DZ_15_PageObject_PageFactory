@@ -13,12 +13,10 @@ public class ProductComponent {
     }
 
     public String getProductName() {
-        //div[@class='inventory_item_name']
         return parentElement.findElement(By.xpath("//div[@class='inventory_item_name']")).getText();
-        //return parentElement.findElement(By.cssSelector(".inventory_item_name")).getText();
     }
-    public int getProductPrice() {
-        return Integer.getInteger(parentElement.findElement(By.cssSelector(".inventory_item_price")).getText());
+    public double getProductPrice() {
+        return Double.parseDouble(parentElement.findElement(By.cssSelector(".inventory_item_price")).getText().substring(1));
     }
 
     public boolean productNameIsVisible(){
