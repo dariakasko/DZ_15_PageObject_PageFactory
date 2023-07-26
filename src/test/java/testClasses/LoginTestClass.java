@@ -6,12 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-import org.openqa.selenium.By;
-import testClasses.BaseTestClass;
 
-public class LoginTestClass extends BaseTestClass {
+public class LoginTestClass extends BaseFirefoxBrowser114TestClass{
     static int counter = 0;
     final String WEB_PAGE = "https://www.saucedemo.com/";
     @Test
