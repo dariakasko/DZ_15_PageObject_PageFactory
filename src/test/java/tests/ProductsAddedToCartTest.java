@@ -6,8 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.baseClasses.BaseFirefoxBrowser114Test;
+import tests.baseClasses.BaseLocalTest;
 
-public class ProductsAddedToCartTest extends BaseFirefoxBrowser114Test {
+public class ProductsAddedToCartTest extends BaseLocalTest {
     static int counter = 0;
     final String WEB_PAGE = "https://www.saucedemo.com/";
 

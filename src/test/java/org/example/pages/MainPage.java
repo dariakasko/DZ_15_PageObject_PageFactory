@@ -20,13 +20,15 @@ public class MainPage extends BaseClass {
     @FindBy(css="#react-burger-menu-btn")
     private WebElement menuButton;
 
-
     @FindBy(css = ".shopping_cart_link")
     private WebElement cartButton;
 
 
     @FindBy(xpath = "//div[@class='inventory_item']")
     private List<WebElement> productsList;
+
+    @FindBy(xpath="//select[@class='product_sort_container']")
+    private WebElement sortMenuButton;
 
     private List<WebElement> sortedListOfProducts;
 
@@ -59,6 +61,7 @@ public class MainPage extends BaseClass {
         }
         return true;
     }
+    /*
     public MainPage sortListByPrice() {
         sortedListOfProducts = productsList.stream().sorted(new Comparator<WebElement>() {
             @Override
@@ -86,6 +89,25 @@ public class MainPage extends BaseClass {
         }
         return true;
     }
+     */
+    public MainPage getListOfProductsSortedByPrice() {
+        sortMenuButton.click();
+        sortMenuButton.findElement(By.xpath("//option[text()='Price (low to high)']")).click();
+        PageFactory.initElements(webDriver, this);
+
+        return this;
+    }
+    public boolean verifyProductsListIsSorted() {
+        for (int i = 0; i < productsList.size() - 1; i++) {
+            if (!(getProductPrice(i, productsList) < getProductPrice(i + 1, productsList))) {
+                if (getProductPrice(i, productsList) == getProductPrice(i + 1, productsList)){
+                    continue;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
     private void addProductToCart(int idOfAddButton) {
         new ProductComponent(productsList.get(idOfAddButton)).addProductToCart();
     }
@@ -105,6 +127,4 @@ public class MainPage extends BaseClass {
         logoutButton.click();
         return new LoginPage(webDriver);
     }
-
-
 }

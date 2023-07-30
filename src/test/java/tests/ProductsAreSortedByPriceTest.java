@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.baseClasses.BaseFirefoxBrowser114Test;
+import tests.baseClasses.BaseLocalTest;
 
-public class ProductsAreSortedTest extends BaseFirefoxBrowser114Test {
+public class ProductsAreSortedByPriceTest extends BaseLocalTest {
     static int counter = 0;
     final String WEB_PAGE = "https://www.saucedemo.com/";
     @Test
-    @DisplayName("Verify product's List is sorted")
+    @DisplayName("Verify product's List is sorted by price")
     public void verifyListIsSorted(){
         chromeDriver.get(WEB_PAGE);
 
@@ -19,7 +20,7 @@ public class ProductsAreSortedTest extends BaseFirefoxBrowser114Test {
                 .enterUserName("standard_user")
                 .eneterUserPassword("secret_sauce")
                 .clickOnLoginButton()
-                .sortListByPrice()
+                .getListOfProductsSortedByPrice()
                 .verifyProductsListIsSorted());
     }
 
