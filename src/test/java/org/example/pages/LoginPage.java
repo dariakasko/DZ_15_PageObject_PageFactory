@@ -1,14 +1,12 @@
-package org.example;
+package org.example.pages;
 
-import org.openqa.selenium.By;
+import org.example.BaseClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.time.Duration;
-
-public class LoginPage extends BaseClass{
+public class LoginPage extends BaseClass {
     @FindBy(xpath = "//input[@name='user-name']")
     private WebElement userNameInputField;
 

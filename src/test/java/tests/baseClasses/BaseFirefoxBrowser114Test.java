@@ -1,4 +1,4 @@
-package testClasses;
+package tests.baseClasses;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,9 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static javax.swing.UIManager.put;
-
-public class BaseFirefoxBrowser114TestClass {
+public class BaseFirefoxBrowser114Test {
     public RemoteWebDriver chromeDriver;
 
     @BeforeEach

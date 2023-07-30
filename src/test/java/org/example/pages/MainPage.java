@@ -1,20 +1,19 @@
-package org.example;
+package org.example.pages;
 
+import org.example.BaseClass;
+import org.example.components.ProductComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import utils.Waiters;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MainPage extends BaseClass{
+public class MainPage extends BaseClass {
     @FindBy(xpath = "//span[text()='Products']")
     private WebElement mainPageName;
 

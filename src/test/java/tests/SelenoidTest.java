@@ -1,4 +1,4 @@
-package testClasses;
+package tests;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeOptions;

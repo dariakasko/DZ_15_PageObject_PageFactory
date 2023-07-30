@@ -1,5 +1,7 @@
-package org.example;
+package org.example.pages;
 
+import org.example.BaseClass;
+import org.example.components.CartComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CartPage extends BaseClass{
+public class CartPage extends BaseClass {
 
     @FindBy(xpath = "//div[@class='cart_item']")
     private List<WebElement> cartList;
